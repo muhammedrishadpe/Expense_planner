@@ -10,6 +10,10 @@ class NewTransaction extends StatelessWidget {
   void submitData() {
     final enteredTitle = titleController.text;
     final enteredAmount = double.parse(amountController.text);
+
+    if (enteredTitle.isEmpty || enteredAmount <= 0) {
+      return;
+    }
     addTx(
       enteredTitle,
       enteredAmount,
@@ -36,7 +40,7 @@ class NewTransaction extends StatelessWidget {
               decoration: InputDecoration(labelText: 'Amount'),
               controller: amountController,
               keyboardType: TextInputType.number,
-              onSubmitted: (_) => submitData,
+              onSubmitted: (_) => submitData(),
               //  onChanged: (val) => ammountInput = val,
             ),
             FlatButton(
